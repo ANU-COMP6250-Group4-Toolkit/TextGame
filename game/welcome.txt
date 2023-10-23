@@ -18,7 +18,7 @@
         \/     \/     \/     \/
 
         Press Number To Select Options:
-            1. Start Game
-            2. Record
-            3. Exit Game
-            4. About Us
+            [1]. Start Game
+            [2]. Record
+            [3]. Exit Game
+            [4]. About Us
