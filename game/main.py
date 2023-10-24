@@ -2,6 +2,8 @@ SCREEN_LENGTH = 90
 SCENARIO_DICT = {}
 OPTIONS_DICT = {}
 DEBUG = True
+
+
 def read_plain_text(source):
     max_length = 0
     plain_text = []
@@ -13,6 +15,7 @@ def read_plain_text(source):
         plain_text.append(line.replace("\n", ""))
         line = f.readline()
     return plain_text, max_length
+
 
 def welcome_page():
     print(" ╭" + "─" * (SCREEN_LENGTH - 2) + "╮ ")
@@ -39,6 +42,7 @@ def init_scenario_file(source):
             SCENARIO_DICT[id].append(line.split(" // ")[1].replace("\n", ""))
         line = f.readline()
     pass
+
 
 def init_option_jump_link(source):
     if DEBUG: print("===[ init_option_jump_link ]===")
@@ -76,12 +80,13 @@ def start_game():
             question_id = OPTIONS_DICT[(question_id, select)]
         else:
             question_id = -1
-    
+
     end_game()
     pass
 
 
 if __name__ == "__main__":
     action = welcome_page()
+
     if action == "1":
         start_game()
