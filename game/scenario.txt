@@ -3,8 +3,15 @@
 - // 2. Request an extension
 - // 3. I don't care, I'm not doing it.
 - // 4. obtuse angle
-1 // (～o￣3￣)～ ?
-- // 1. (👉ﾟヮﾟ)👉
-- // 2. 👈(ﾟヮﾟ👈)
-- // 3. o(*≧▽≦)ツ┏━┓
-- // 4. (o゜▽゜)o☆
+1 // Questioin 1
+- // 1. haha
+- // 2. hehe
+- // 3. hihi
+- // 4. hoho
+- // 5. huhu
+2 // Questioin 2
+- // 1. haha2
+- // 2. hehe2
+- // 3. hihi2
+- // 4. hoho2
+- // 5. huhu2
