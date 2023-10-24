@@ -37,6 +37,7 @@ def show_interacting_window(fileName):
 
 def calculate_ending(collaboration, skill, confidence):
     num = collaboration + skill + confidence
+    print(num)
     if num == 8:
         return "ending1"
     elif num == 9:
@@ -48,7 +49,14 @@ def calculate_ending(collaboration, skill, confidence):
 
 
 def show_endings():
-    pass
+    print(" ╭" + "─" * (SCREEN_LENGTH - 2) + "╮ ")
+    texts, max_length = read_plain_text("thank-you-page.txt")
+    for text in texts:
+        output = " │" + " " * (SCREEN_LENGTH - 4) + "┃ "
+        to_middle_space = (SCREEN_LENGTH - max_length - 4) // 2
+        output = output[: 2 + to_middle_space] + text + output[to_middle_space + len(text):]
+        print(output)
+    print(" ╰" + "━" * (SCREEN_LENGTH - 2) + "╯ ")
 
 
 def updateStatus(day, choice, collaboration, skill, confidence):
@@ -92,7 +100,7 @@ def updateStatus(day, choice, collaboration, skill, confidence):
     # day 4
     elif day == "4":
         return collaboration, skill, confidence
-    # day 5
+    # day 5.txt
     elif day == "5":
         if choice == "1":
             collaboration += 1
@@ -135,7 +143,7 @@ def run_game():
         # day i
         tell_story(str(i+1))
         choice = show_interacting_window("Stories/" + str(i+1) + "-choices.txt")
-        # collaboration, skill, confidence = updateStatus(str(i+1), choice, collaboration, skill, confidence)
+        collaboration, skill, confidence = updateStatus(str(i+1), choice, collaboration, skill, confidence)
         tell_story(str(i+1) + "-" + choice)
 
     # game over
