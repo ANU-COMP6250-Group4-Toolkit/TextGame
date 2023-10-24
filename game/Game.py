@@ -1,6 +1,7 @@
 SCREEN_LENGTH = 90
 
 def getChoice():
+
     while True:
         choice = input("Your choice: ")
         if choice == "1" or choice == "2" or choice == "3":
@@ -21,19 +22,29 @@ def read_plain_text(source):
         line = f.readline()
     return plain_text, max_length
 
-def show_title():
+
+def show_interacting_window(fileName):
     print(" ╭" + "─" * (SCREEN_LENGTH - 2) + "╮ ")
-    welcome, max_length = read_plain_text("welcome.txt")
-    for text in welcome:
+    texts, max_length = read_plain_text(fileName)
+    for text in texts:
         output = " │" + " " * (SCREEN_LENGTH - 4) + "┃ "
         to_middle_space = (SCREEN_LENGTH - max_length - 4) // 2
         output = output[: 2 + to_middle_space] + text + output[to_middle_space + len(text):]
         print(output)
     print(" ╰" + "━" * (SCREEN_LENGTH - 2) + "╯ ")
+    return getChoice()
 
 
 def calculate_ending(collaboration, skill, confidence):
-    pass
+    num = collaboration + skill + confidence
+    if num == 8:
+        return "ending1"
+    elif num == 9:
+        return "ending2"
+    elif num == 10:
+        return "ending3"
+    elif num == 11:
+        return "ending4"
 
 
 def show_endings():
@@ -41,7 +52,63 @@ def show_endings():
 
 
 def updateStatus(day, choice, collaboration, skill, confidence):
-    pass
+    # day 1
+    if day == "1":
+        if choice == "1":
+            collaboration += 1
+            skill += 2
+            confidence += -1
+            return collaboration, skill, confidence
+        elif choice == "2":
+            collaboration += 2
+            skill += -1
+            confidence += 2
+            return collaboration, skill, confidence
+        elif choice == "3":
+            collaboration += 2
+            skill += 0
+            confidence += 1
+            return collaboration, skill, confidence
+    # day 2
+    elif day == "2":
+        return collaboration, skill, confidence
+    # day 3
+    elif day == "3":
+        if choice == "1":
+            collaboration += 3
+            skill += -1
+            confidence += 1
+            return collaboration, skill, confidence
+        elif choice == "2":
+            collaboration += 0
+            skill += 3
+            confidence += 0
+            return collaboration, skill, confidence
+        elif choice == "3":
+            collaboration += -1
+            skill += 2
+            confidence += 1
+            return collaboration, skill, confidence
+    # day 4
+    elif day == "4":
+        return collaboration, skill, confidence
+    # day 5
+    elif day == "5":
+        if choice == "1":
+            collaboration += 1
+            skill += 3
+            confidence += 0
+            return collaboration, skill, confidence
+        elif choice == "2":
+            collaboration += 3
+            skill += 0
+            confidence += 2
+            return collaboration, skill, confidence
+        elif choice == "3":
+            collaboration += 2
+            skill += 0
+            confidence += 3
+            return collaboration, skill, confidence
 
 
 def tell_story(story_code):
@@ -54,7 +121,7 @@ def tell_story(story_code):
         input()
 
 
-if __name__ == '__main__':
+def run_game():
     # init
     collaboration = 0
     skill = 0
@@ -63,18 +130,23 @@ if __name__ == '__main__':
     # intro
     tell_story("0")
 
-    # start game
-    show_title()
-
     # loop for five days
     for i in range(5):
         # day i
-        tell_story(str(i))
-        choice = getChoice()
-        collaboration, skill, confidence = updateStatus(str(i), choice, collaboration, skill, confidence)
-        tell_story(str(i) + choice)
+        tell_story(str(i+1))
+        choice = show_interacting_window("Stories/" + str(i+1) + "-choices.txt")
+        # collaboration, skill, confidence = updateStatus(str(i+1), choice, collaboration, skill, confidence)
+        tell_story(str(i+1) + "-" + choice)
 
     # game over
     ending_code = calculate_ending(collaboration, skill, confidence)
     tell_story(ending_code)
     show_endings()
+
+
+if __name__ == '__main__':
+    # start game
+    code = show_interacting_window("welcome.txt")
+
+    if code == "1":
+        run_game()
