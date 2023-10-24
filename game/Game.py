@@ -1,6 +1,15 @@
+isGameOver = False
+
+
+def initGame():
+    isGameOver = False
+
+
 if __name__ == '__main__':
+    # init game
+    initGame()
     # run game loop
-    while not isGameOver():
+    while not isGameOver:
         if not isCurrentStoryOver():
             tellStory(currentStory)
         else:
